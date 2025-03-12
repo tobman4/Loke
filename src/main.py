@@ -1,4 +1,5 @@
 import time
+import socket
 import logging
 from argparse import ArgumentParser
 
@@ -24,6 +25,12 @@ parser.add_argument(
   type=int
 )
 
+parser.add_argument(
+  "--hostname",
+  help=f"Hostname to add to metric label. Default \"{socket.gethostname()}\"",
+  default=socket.gethostname()
+)
+
 args = parser.parse_args();
 
 if __name__ == "__main__":
@@ -34,5 +41,5 @@ if __name__ == "__main__":
 
   while True:
     time.sleep(args.interval)
-    cpu.export()
-    mem.export()
+    cpu.export(args)
+    mem.export(args)
