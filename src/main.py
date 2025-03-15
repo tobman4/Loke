@@ -8,6 +8,7 @@ from prometheus_client import start_http_server
 
 import cpu
 import mem
+import disk
 
 parser = ArgumentParser()
 
@@ -43,3 +44,4 @@ if __name__ == "__main__":
     time.sleep(args.interval)
     cpu.export(args)
     mem.export(args)
+    disk.export(args)
