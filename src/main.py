@@ -9,6 +9,7 @@ from prometheus_client import start_http_server
 import cpu
 import mem
 import disk
+import proc
 
 parser = ArgumentParser()
 
@@ -45,3 +46,4 @@ if __name__ == "__main__":
     cpu.export(args)
     mem.export(args)
     disk.export(args)
+    proc.expor(args)
