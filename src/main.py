@@ -33,13 +33,18 @@ parser.add_argument(
   default=socket.gethostname()
 )
 
+parser.add_argument(
+    "-a", "--address",
+    default="0.0.0.0"
+)
+
 args = parser.parse_args();
 
 if __name__ == "__main__":
   logging.basicConfig(level=logging.INFO)
 
-  logging.info("Start export on port %i", args.port)
-  start_http_server(args.port)
+  logging.info("Start export on port %s:%i", args.address, args.port)
+  start_http_server(args.port, addr=args.address)
 
   while True:
     time.sleep(args.interval)
