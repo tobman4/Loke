@@ -51,4 +51,4 @@ if __name__ == "__main__":
     cpu.export(args)
     mem.export(args)
     disk.export(args)
-    proc.expor(args)
+    proc.export(args)
