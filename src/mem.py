@@ -1,4 +1,6 @@
 from argparse import Namespace
+import logging
+
 import psutil
 
 from prometheus_client import Gauge
@@ -15,7 +17,12 @@ USED_GAUGE = Gauge(
   labelnames=["host"]
 )
 
+LOGGER = logging.getLogger("mem")
+
 def export(args: Namespace):
-  mem = psutil.virtual_memory()
-  USED_GAUGE.labels(args.hostname).set(mem.used)
-  PERCENT_GAUGE.labels(args.hostname).set(mem.percent)
+  try:
+    mem = psutil.virtual_memory()
+    USED_GAUGE.labels(args.hostname).set(mem.used)
+    PERCENT_GAUGE.labels(args.hostname).set(mem.percent)
+  except Exception:
+    LOGGER.exception("Failed to export memory metrics")

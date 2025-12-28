@@ -1,5 +1,7 @@
 
 from argparse import Namespace
+import logging
+
 from prometheus_client import Gauge
 import psutil
 
@@ -10,7 +12,12 @@ NUM_PROC = Gauge(
     labelnames=["host"]
 )
 
-def expor(args: Namespace):
-    procs = psutil.pids()
+LOGGER = logging.getLogger("proc")
 
-    NUM_PROC.labels(args.hostname).set(len(procs))
+def expor(args: Namespace):
+    try:
+        procs = psutil.pids()
+
+        NUM_PROC.labels(args.hostname).set(len(procs))
+    except Exception:
+        LOGGER.exception("Failed to export process metrics")
