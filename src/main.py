@@ -10,6 +10,7 @@ import cpu
 import mem
 import disk
 import proc
+import network
 
 parser = ArgumentParser()
 
@@ -52,3 +53,4 @@ if __name__ == "__main__":
     mem.export(args)
     disk.export(args)
     proc.export(args)
+    network.export(args)
