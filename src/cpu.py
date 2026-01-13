@@ -1,5 +1,6 @@
 from argparse import Namespace
 import logging
+import time
 
 import psutil
 from prometheus_client import Gauge
